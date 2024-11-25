@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -183,7 +184,7 @@ const Portfolio = () => {
                   </div>
                   <p className="text-gray-600 mb-2">iHub Anubhuti-IIITD Foundation | Jun 2024 - Present</p>
                   <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    <li>Developed advanced chatbots using RAG chains and AgentTools on Anthropic Claude and Gemini-1.5</li>
+                    <li>Developed advanced chatbots using RAG chains and AgentTools on Anthropic&apos;s Claude and Gemini-1.5</li>
                     <li>Implemented LLaMA3 Guard for robust input/output sanitization</li>
                     <li>Engineered MindLamp platform customization using TypeScript/React Native</li>
                     <li>Developed ACLF Dashboard for liver cancer mortality prediction</li>

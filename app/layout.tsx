@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "../styles/globals.css"; // Adjust path if necessary
+import "./globals.css"; // Adjust path if necessary
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff", // Ensure fonts are placed correctly in the public folder or adjust path
