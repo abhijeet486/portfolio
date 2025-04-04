@@ -1,5 +1,6 @@
 // import Image from "next/image";
-import Portfolio from '../components/Portfolio'; // Import your Portfolio component
+import Portfolio from '@/components/Portfolio';
+// import Portfolio from '../components/Portfolio'; // Import your Portfolio component
 import Head from "next/head"; // For managing SEO and meta tags
 
 export default function Home() {
@@ -10,8 +11,6 @@ export default function Home() {
         <title>My Portfolio</title>
         <meta name="description" content="Welcome to my personal portfolio website" />
       </Head>
-
-      <h1>Welcome to My Portfolio</h1>
       <Portfolio /> {/* Render the Portfolio component */}
     </div>
   );

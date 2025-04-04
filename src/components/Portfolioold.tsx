@@ -1,14 +1,22 @@
-"use client";
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Github, Linkedin, Mail, Calendar, Building2, FlaskConical, Brain, Search , GraduationCap, Code, GitBranch} from 'lucide-react';
+import { Github, Linkedin, Mail, Calendar, Building2, FlaskConical, Brain, Search , GraduationCap, Code, GitBranch, ChevronDown} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MinusIcon, PlusIcon } from 'lucide-react';
 
 const Portfolio = () => {
   // Previous state and skills objects remain the same
   const [activeTab, setActiveTab] = useState('experience');
+  // Previous state and data objects remain the same
+  const [showMore, setShowMore] = useState(false);
 
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
+  };
   const skills = {
     languages: ['Python', 'C/C++', 'JAVA', 'SQL'],
     frameworks: ['Django', 'Pytorch', 'OpenCV', 'JavaFX', 'Flask', 'Langchain', 'HF Transformers', 'TensorFlow', 'Scikit', 'Keras'],
@@ -135,9 +143,48 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-amber-900 via-neutral-900 to-zinc-900 p-6">
+    <div className="max-w-7xl mx-auto space-y-8">
+    {/* Hero Section with Image */}
+      {/* <img 
+        src="/api/placeholder/1920/1080" 
+        alt="Hero background" 
+        className="absolute inset-0 w-full h-full object-cover opacity-50"
+      /> */}
+        <div className="relative rounded-3xl overflow-hidden bg-glass backdrop-blur-xl p-8">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl" />
+          <div className="relative z-10">
+            <h1 className="text-5xl font-bold text-white/90 mb-4">Abhijeet Singh</h1>
+            <p className="text-xl text-white/70">Full Stack Developer & ML Engineer</p>
+          <div className="flex flex-wrap gap-4 pt-4">
+            <a 
+              href="mailto:sabhijeet652@gmail.com" 
+              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all transition-colors rounded-full px-4 py-2"
+            >
+              <Mail size={18} />
+              <span>sabhijeet652@gmail.com</span>
+            </a>
+            <a 
+              href="https://github.com/abhijeet486" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all transition-colors rounded-full px-4 py-2"
+            >
+              <Github size={18} />
+              <span>GitHub</span>
+            </a>
+            <a 
+              href="https://linkedin.com/in/abhijeet-singh-92202b212" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-all transition-colors rounded-full px-4 py-2"
+            >
+              <Linkedin size={18} />
+              <span>LinkedIn</span>
+            </a>
+        </div>
+      </div>
       {/* Header Section remains the same */}
-      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Abhijeet Singh</h1>
@@ -163,12 +210,12 @@ const Portfolio = () => {
       {/* Main Content */}
       <div className="max-w-5xl mx-auto">
         <Tabs defaultValue="experience" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-5 mb-8">
-            <TabsTrigger value="experience">Experience</TabsTrigger>
-            <TabsTrigger value="research">Research</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
-            <TabsTrigger value="projects">Projects</TabsTrigger>
-            <TabsTrigger value="skills">Skills</TabsTrigger>
+          <TabsList className="bg-white/5 backdrop-blur-md p-2 rounded-2xl flex gap-2">
+            <TabsTrigger className="px-6 py-3 rounded-xl text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white" value="experience">Experience</TabsTrigger>
+            <TabsTrigger className="px-6 py-3 rounded-xl text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white" value="research">Research</TabsTrigger>
+            <TabsTrigger className="px-6 py-3 rounded-xl text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white" value="education">Education</TabsTrigger>
+            <TabsTrigger className="px-6 py-3 rounded-xl text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white" value="projects">Projects</TabsTrigger>
+            <TabsTrigger className="px-6 py-3 rounded-xl text-white/70 data-[state=active]:bg-white/10 data-[state=active]:text-white" value="skills">Skills</TabsTrigger>
           </TabsList>
           {/* Experience Tab - Same as before */}
           <TabsContent value="experience">
@@ -177,14 +224,14 @@ const Portfolio = () => {
                 <CardTitle>Professional Experience</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="border-l-4 border-blue-500 pl-4">
+                <div className="rounded-2xl bg-white/5 backdrop-blur-md p-6 hover:bg-white/10 transition-all">
                   <div className="flex items-center gap-2 mb-2">
                     <Building2 className="text-gray-600" size={20} />
                     <h3 className="text-xl font-semibold">Full Stack Developer</h3>
                   </div>
                   <p className="text-gray-600 mb-2">iHub Anubhuti-IIITD Foundation | Jun 2024 - Present</p>
                   <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    <li>Developed advanced chatbots using RAG chains and AgentTools on Anthropic&apos;s Claude and Gemini-1.5</li>
+                    <li>Developed advanced chatbots using RAG chains and AgentTools on Anthropic Claude and Gemini-1.5</li>
                     <li>Implemented LLaMA3 Guard for robust input/output sanitization</li>
                     <li>Engineered MindLamp platform customization using TypeScript/React Native</li>
                     <li>Developed ACLF Dashboard for liver cancer mortality prediction</li>
@@ -220,7 +267,7 @@ const Portfolio = () => {
                     </div>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {item.areas.map((area) => (
-                        <Badge key={area} variant="secondary" className="bg-purple-100 text-purple-800">
+                        <Badge key={area} variant="secondary" className="px-3 py-1 rounded-full bg-amber-500/20 text-white/80">
                           {area}
                         </Badge>
                       ))}
@@ -257,7 +304,7 @@ const Portfolio = () => {
                   <h4 className="font-semibold mb-2">Key Courses:</h4>
                   <div className="flex flex-wrap gap-2">
                     {['Software Development', 'Operating Systems', 'Data Structures', 'Computer Vision', 'NLP', 'Machine Learning'].map((course) => (
-                      <Badge key={course} variant="secondary">{course}</Badge>
+                      <Badge key={course} className="px-3 py-1 rounded-full bg-amber-500/20 text-white/80" variant="secondary">{course}</Badge>
                     ))}
                   </div>
                 </div>
@@ -276,7 +323,13 @@ const Portfolio = () => {
               </CardHeader>
               <CardContent className="space-y-8">
                 {projects.map((project, index) => (
-                  <div key={project.title} className="border-l-4 border-blue-500 pl-4 hover:bg-gray-50 transition-colors p-4 rounded">
+                  // <div key={project.title} className="rounded-2xl bg-white/5 backdrop-blur-md p-6 hover:bg-white/10 transition-all hover:bg-gray-50 transition-colors p-4 rounded">
+                  <motion.div
+                    key={project.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
                     <div className="flex items-center gap-2 mb-2">
                       <GitBranch className="text-gray-600" size={18} />
                       <h3 className="text-xl font-semibold">{project.title}</h3>
@@ -296,7 +349,8 @@ const Portfolio = () => {
                         <Badge key={tech} variant="outline">{tech}</Badge>
                       ))}
                     </div>
-                  </div>
+                  {/* </div> */}
+                  </motion.div>
                 ))}
               </CardContent>
             </Card>
@@ -315,7 +369,7 @@ const Portfolio = () => {
                       <h3 className="text-lg font-semibold mb-3 capitalize">{category.replace(/([A-Z])/g, ' $1').trim()}</h3>
                       <div className="flex flex-wrap gap-2">
                         {skillList.map((skill) => (
-                          <Badge key={skill} variant="secondary">{skill}</Badge>
+                          <Badge key={skill} className="px-3 py-1 rounded-full bg-amber-500/20 text-white/80" variant="secondary">{skill}</Badge>
                         ))}
                       </div>
                     </div>
@@ -325,6 +379,7 @@ const Portfolio = () => {
             </Card>
           </TabsContent>
         </Tabs>
+      </div>
       </div>
     </div>
   );

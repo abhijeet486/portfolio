@@ -1,12 +1,21 @@
+"use client";
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Github, Linkedin, Mail, Calendar, Building2, FlaskConical, Brain, Search , GraduationCap, Code, GitBranch} from 'lucide-react';
-
+import { Github, Linkedin, Mail, Calendar, Building2, FlaskConical, Brain, Search , GraduationCap, Code, GitBranch, ChevronDown} from 'lucide-react';
+import { motion } from 'framer-motion';
 const Portfolio = () => {
   // Previous state and skills objects remain the same
   const [activeTab, setActiveTab] = useState('experience');
+  const [showMore, setShowMore] = useState(false);
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
+  };
+
 
   const skills = {
     languages: ['Python', 'C/C++', 'JAVA', 'SQL'],
@@ -134,44 +143,76 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      {/* Header Section remains the same */}
-      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Abhijeet Singh</h1>
-            <h2 className="text-xl text-gray-600 mb-4">Full Stack Developer & ML Engineer</h2>
-            <div className="flex flex-wrap gap-3">
-              <a href="mailto:sabhijeet652@gmail.com" className="flex items-center gap-2 text-blue-600 hover:text-blue-800">
-                <Mail size={18} />
-                <span>sabhijeet652@gmail.com</span>
-              </a>
-              <a href="https://github.com/abhijeet486" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
-                <Github size={18} />
-                <span>github.com/abhijeet486</span>
-              </a>
-              <a href="https://linkedin.com/in/abhijeet-singh-92202b212" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:text-blue-800">
-                <Linkedin size={18} />
-                <span>LinkedIn</span>
-              </a>
-            </div>
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    {/* Hero Section with Image */}
+    <div className="relative h-[40vh] bg-gradient-to-r from-blue-600 to-purple-600 overflow-hidden">
+      <div className="absolute inset-0 bg-black/50" />
+      <img 
+        src="PXL_20241013_165210872copy.jpg" 
+        alt="Hero background" 
+        className="absolute inset-0 w-full h-full object-cover opacity-50"
+      />
+      <div className="relative h-full max-w-5xl mx-auto px-8 flex items-center">
+        <div className="text-white space-y-4 animate-fade-in-up">
+          <h1 className="text-5xl font-bold">Abhijeet Singh</h1>
+          <p className="text-xl opacity-90">Full Stack Developer & ML Engineer</p>
+          <div className="flex flex-wrap gap-4 pt-4">
+            <a 
+              href="mailto:sabhijeet652@gmail.com" 
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors rounded-full px-4 py-2"
+            >
+              <Mail size={18} />
+              <span>sabhijeet652@gmail.com</span>
+            </a>
+            <a 
+              href="https://github.com/abhijeet486" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors rounded-full px-4 py-2"
+            >
+              <Github size={18} />
+              <span>GitHub</span>
+            </a>
+            <a 
+              href="https://linkedin.com/in/abhijeet-singh-92202b212" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors rounded-full px-4 py-2"
+            >
+              <Linkedin size={18} />
+              <span>LinkedIn</span>
+            </a>
           </div>
         </div>
       </div>
+      </div>
 
       {/* Main Content */}
-      <div className="max-w-5xl mx-auto">
-        <Tabs defaultValue="experience" className="space-y-4">
+      <div className="max-w-5xl mx-auto px-8 py-12">
+      <Tabs 
+          defaultValue="experience" 
+          className="space-y-4"
+          onValueChange={setActiveTab}
+        >
           <TabsList className="grid w-full grid-cols-5 mb-8">
-            <TabsTrigger value="experience">Experience</TabsTrigger>
-            <TabsTrigger value="research">Research</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
-            <TabsTrigger value="projects">Projects</TabsTrigger>
-            <TabsTrigger value="skills">Skills</TabsTrigger>
+            {['experience', 'research', 'education', 'projects', 'skills'].map((tab) => (
+              <TabsTrigger 
+                key={tab} 
+                value={tab}
+                className="transition-all duration-300 hover:bg-blue-50"
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </TabsTrigger>
+            ))}
           </TabsList>
           {/* Experience Tab - Same as before */}
           <TabsContent value="experience">
-            <Card>
+            <motion.div
+              initial="initial"
+              animate="animate"
+              variants={fadeInUp}
+            >
+              <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle>Professional Experience</CardTitle>
               </CardHeader>
@@ -183,7 +224,7 @@ const Portfolio = () => {
                   </div>
                   <p className="text-gray-600 mb-2">iHub Anubhuti-IIITD Foundation | Jun 2024 - Present</p>
                   <ul className="list-disc list-inside space-y-2 text-gray-700">
-                    <li>Developed advanced chatbots using RAG chains and AgentTools on Anthropic Claude and Gemini-1.5</li>
+                    <li>Developed advanced chatbots using RAG chains and AgentTools on Anthropic&apos;s Claude and Gemini-1.5</li>
                     <li>Implemented LLaMA3 Guard for robust input/output sanitization</li>
                     <li>Engineered MindLamp platform customization using TypeScript/React Native</li>
                     <li>Developed ACLF Dashboard for liver cancer mortality prediction</li>
@@ -191,11 +232,18 @@ const Portfolio = () => {
                 </div>
               </CardContent>
             </Card>
+            </motion.div>
           </TabsContent>
 
           {/* New Research Tab */}
           <TabsContent value="research">
-            <Card>
+            <motion.div
+                initial="initial"
+                animate="animate"
+                variants={fadeInUp}
+              >
+              <Card className="hover:shadow-lg transition-shadow">
+            {/* <Card> */}
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FlaskConical size={24} className="text-purple-500" />
@@ -236,6 +284,7 @@ const Portfolio = () => {
                 ))}
               </CardContent>
             </Card>
+            </motion.div>
           </TabsContent>
 
           {/* Other tabs remain the same */}
@@ -266,16 +315,28 @@ const Portfolio = () => {
 
           {/* Updated Projects Tab */}
           <TabsContent value="projects">
-            <Card>
+            <motion.div
+              initial="initial"
+              animate="animate"
+              variants={fadeInUp}
+            >
+              <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Code size={24} className="text-blue-500" />
                   Notable Projects
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-8">
-                {projects.map((project, index) => (
-                  <div key={project.title} className="border-l-4 border-blue-500 pl-4 hover:bg-gray-50 transition-colors p-4 rounded">
+                <CardContent className="space-y-8">
+                  {projects.slice(0, showMore ? projects.length : 3).map((project, index) => (
+                    <motion.div
+                      key={project.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="border-l-4 border-blue-500 pl-4 hover:bg-gray-50 transition-all duration-300 p-4 rounded group"
+                    >
+                  {/* <div key={project.title} className="border-l-4 border-blue-500 pl-4 hover:bg-gray-50 transition-colors p-4 rounded"> */}
                     <div className="flex items-center gap-2 mb-2">
                       <GitBranch className="text-gray-600" size={18} />
                       <h3 className="text-xl font-semibold">{project.title}</h3>
@@ -295,10 +356,21 @@ const Portfolio = () => {
                         <Badge key={tech} variant="outline">{tech}</Badge>
                       ))}
                     </div>
-                  </div>
+                  {/* </div> */}
+                  </motion.div>
                 ))}
+                {!showMore && projects.length > 3 && (
+                    <button
+                      onClick={() => setShowMore(true)}
+                      className="w-full py-3 text-blue-600 hover:text-blue-800 transition-colors flex items-center justify-center gap-2"
+                    >
+                      Show More Projects
+                      <ChevronDown className="animate-bounce" />
+                    </button>
+                )}
               </CardContent>
             </Card>
+            </motion.div>
           </TabsContent>
 
           {/* Skills Tab - Same as before */}
